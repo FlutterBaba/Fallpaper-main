@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:wallpaper_app/widget/color_remover.dart';
-
 import '../data/data.dart';
 import '../models/photos_model.dart';
 import '../widget/wallpaperwidget.dart';
@@ -37,7 +36,6 @@ class _CategorieScreenState extends State<CategorieScreen> {
         photos.add(photosModel);
         //print(photosModel.toString()+ "  "+ photosModel.src.portrait);
       });
-
       setState(() {});
     });
     setState(() {
@@ -55,12 +53,12 @@ class _CategorieScreenState extends State<CategorieScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Appcolor.kblack),
         title: const Text(
           "Fallpaper",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Appcolor.kblack),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Appcolor.kwhite,
         elevation: 0.0,
         centerTitle: true,
       ),

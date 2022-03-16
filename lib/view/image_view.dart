@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
@@ -33,7 +32,6 @@ class _ImageViewState extends State<ImageView> {
           builder: (context, setState) {
             return AlertDialog(
               content: SizedBox(
-                // color: Colors.red,
                 height: 200,
                 child: contentText == "Loading"
                     ? const Center(
@@ -139,7 +137,7 @@ class _ImageViewState extends State<ImageView> {
             onPressed: () {
               shareImage();
             },
-            icon: const Icon(Icons.share),
+            icon: const Icon(Icons.share_outlined),
           ),
           IconButton(
             onPressed: () async {
@@ -150,7 +148,7 @@ class _ImageViewState extends State<ImageView> {
                 ),
               );
             },
-            icon: const Icon(Icons.download),
+            icon: const Icon(Icons.download_outlined),
           ),
         ],
         iconTheme: const IconThemeData(color: Colors.black),
@@ -162,15 +160,13 @@ class _ImageViewState extends State<ImageView> {
             child: SizedBox(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              child: kIsWeb
-                  ? Image.network(widget.imgPath, fit: BoxFit.cover)
-                  : CachedNetworkImage(
-                      imageUrl: widget.imgPath,
-                      placeholder: (context, url) => Container(
-                        color: const Color(0xfff5f8fd),
-                      ),
-                      fit: BoxFit.cover,
-                    ),
+              child: CachedNetworkImage(
+                imageUrl: widget.imgPath,
+                placeholder: (context, url) => Container(
+                  color: const Color(0xfff5f8fd),
+                ),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Container(
@@ -181,60 +177,58 @@ class _ImageViewState extends State<ImageView> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 InkWell(
-                    onTap: () async {
-                      myDialogBox(context);
-                    },
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                          width: MediaQuery.of(context).size.width / 2,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: const Color(0xff1C1B1B).withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(40),
-                          ),
+                  onTap: () async {
+                    myDialogBox(context);
+                  },
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: const Color(0xff1C1B1B).withOpacity(0.8),
+                          borderRadius: BorderRadius.circular(40),
                         ),
-                        Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            height: 50,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.white24, width: 1),
-                                borderRadius: BorderRadius.circular(40),
-                                gradient: const LinearGradient(
-                                    colors: [
-                                      Color(0x36FFFFFF),
-                                      Color(0x0FFFFFFF)
-                                    ],
-                                    begin: FractionalOffset.topLeft,
-                                    end: FractionalOffset.bottomRight)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text(
-                                  "Set Wallpaper",
-                                  style: TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 1,
-                                ),
-                                Text(
-                                  kIsWeb
-                                      ? "Image will open in new tab to download"
-                                      : "Image will be saved in gallery",
-                                  style: TextStyle(
-                                      fontSize: 8, color: Colors.white70),
-                                ),
-                              ],
-                            )),
-                      ],
-                    )),
-                const SizedBox(
-                  height: 16,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: 50,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white24,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(40),
+                            gradient: const LinearGradient(
+                                colors: [Color(0x36FFFFFF), Color(0x0FFFFFFF)],
+                                begin: FractionalOffset.topLeft,
+                                end: FractionalOffset.bottomRight)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Text(
+                              "Set Wallpaper",
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(
+                              height: 1,
+                            ),
+                            Text(
+                              "Image will be saved in gallery",
+                              style: TextStyle(
+                                fontSize: 8,
+                                color: Colors.white70,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 50,
